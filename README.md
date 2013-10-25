@@ -11,7 +11,7 @@ Benötigte Packete:
 ##PINOUT
 Folgende Pinbezeichnung können als Parameter verwendet werden:
 | PIN   | NAME  |
-| ----- | ----- |
+|-------|-------|
 | 20    | DIO0  |
 | 19    | DIO1  |
 | 18    | DIO2  |
