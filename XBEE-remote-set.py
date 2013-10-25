@@ -1,22 +1,16 @@
 import argparse
-from xbee import ZigBee
 import serial
+from xbee import ZigBee
 
-status_help = {'\x01': 'Error', '\x02': 'Invalid Command', '\x03': 'Invalid Parameter', '\x04': 'Remote Command Transmission failed'}
-pins = {'DIO0': 'D0', 'DIO1': 'D1', 'DIO2': 'D2', 'DIO3': 'D3', 'DIO4': 'D4', 'DIO5': 'D5', 'DIO11': 'P1', 'DIO12': 'P2', 'DIO13': 'P3'}
+status_help = {'\x01': 'Error', '\x02': 'Invalid command', '\x03': 'Invalid parameter', '\x04': 'Remote command transmission failed (check device address & configuration)'}
+pin_to_command = {'DIO0': 'D0', 'DIO1': 'D1', 'DIO2': 'D2', 'DIO3': 'D3', 'DIO4': 'D4', 'DIO5': 'D5', 'DIO11': 'P1', 'DIO12': 'P2', 'DIO13': 'P3'}
 on = '\x05'
 off = '\x04'
 cmd_id = '\xC0'
 
+
 def main():
-    #parsing commandline arguments
-    parser = argparse.ArgumentParser(description='Controls GPIO Port on remote XBEE Device')
-    parser.add_argument('device', help="8 byte device address, e.g 0013A20040A15ABA")
-    parser.add_argument('gpio', choices=['DIO0', 'DIO1', 'DIO2', 'DIO3', 'DIO4', 'DIO5', 'DIO11', 'DIO12', 'DIO13'], help="GPIO Port")
-    parser.add_argument('state', type=int, choices=[1, 0], help="Turn on or off")
-    parser.add_argument('port', help='Serial Port Device, e.g COM7 or /dev/ttyUSB0')
-    parser.add_argument('--ack', help='awaits reponse to check if packet was successfully sent.', action='store_true')
-    args = parser.parse_args()
+    args = setup_argparser()
 
     #setup serial port
     ser = serial.Serial(args.port, 9600)
@@ -27,9 +21,11 @@ def main():
 
     if args.ack:
         #send command and request an acknowledge
-        xbee.remote_at(dest_addr_long=to_hex(args.device), command=pins[args.gpio], parameter=p, frame_id=cmd_id)
+        xbee.remote_at(dest_addr_long=to_hex(args.device), command=pin_to_command[args.gpio], parameter=p, frame_id=cmd_id)
         try:
             response = xbee.wait_read_frame()
+
+            #sucessfully transmitted command
             if response['status'] == '\x00' and response['frame_id'] == cmd_id:
                 print "command successfull"
 
@@ -38,14 +34,26 @@ def main():
                 exit_code = ord(response['status'])
 
         except KeyboardInterrupt:
-            "No response received. quitting."
+            print "cancel script"
     else:
-        #send command without requesting acknowledge
-        xbee.remote_at(dest_addr_long=to_hex(args.device), command=pins[args.gpio], parameter=p)
+        #send command without requesting ack
+        xbee.remote_at(dest_addr_long=to_hex(args.device), command=pin_to_command[args.gpio], parameter=p)
 
     #clean up
     ser.close()
     exit(exit_code)
+
+
+def setup_argparser():
+    #parsing commandline arguments
+    parser = argparse.ArgumentParser(description='Controls GPIO port on remote XBEE device')
+    parser.add_argument('device', help="8 byte device address, e.g 0013A20040A15ABA")
+    parser.add_argument('gpio', choices=['DIO0', 'DIO1', 'DIO2', 'DIO3', 'DIO4', 'DIO5', 'DIO11', 'DIO12', 'DIO13'], help="GPIO port")
+    parser.add_argument('state', type=int, choices=[1, 0], help="Turn on or off")
+    parser.add_argument('port', help='Serial port device, e.g COM7 or /dev/ttyUSB0')
+    parser.add_argument('--ack', help='awaits response to check if packet was successfully sent (TCP like).', action='store_true')
+    args = parser.parse_args()
+    return args
 
 
 def to_hex(s):
