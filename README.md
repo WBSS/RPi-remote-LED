@@ -5,7 +5,6 @@ Python Scripts zum steuern/abfragen der GPIO Pins von XBEE Serie 2 Devices.
 
 ##Installation
 Benötigte Packete:  
-
 ```sudo aptitude install python-pip```  
 ```sudo pip install -r requirements.txt```  
 
@@ -41,9 +40,9 @@ optional arguments:
                         sent (TCP like).
 </pre>
 
-Beispiel:
-```sudo ./XBEE-remote-set.py 0013a200409888ba DIO11 1 /dev/ttyS0 --ack```
-output:
+Beispiel:  
+```sudo ./XBEE-remote-set.py 0013a200409888ba DIO11 1 /dev/ttyS0 --ack```  
+output:  
 ```command successfull```
 
 ###XBEE-remote-get.py
@@ -60,6 +59,6 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
 </pre>
-Beispiel:
-```sudo ./XBEE-remote-get.py 0013a200409888ba DIO11 /dev/ttyS0```
+Beispiel:  
+```sudo ./XBEE-remote-get.py 0013a200409888ba DIO11 /dev/ttyS0```  
 Ausgabe: True oder False bei digital Eingang, Wert von 0-1023 bei analog Eingang
