@@ -3,7 +3,7 @@ import serial
 from xbee import ZigBee
 
 status_help = {'\x01': 'Error', '\x02': 'Invalid command', '\x03': 'Invalid parameter', '\x04': 'Remote command transmission failed (check device address & configuration)'}
-pin_to_command = {'DIO0': 'D0', 'DIO1': 'D1', 'DIO2': 'D2', 'DIO3': 'D3', 'DIO4': 'D4', 'DIO5': 'D5', 'DIO11': 'P1', 'DIO12': 'P2', 'DIO13': 'P3'}
+pin_to_command = {'DIO0': 'D0', 'DIO1': 'D1', 'DIO2': 'D2', 'DIO3': 'D3', 'DIO4': 'D4', 'DIO5': 'D5', 'DIO11': 'P1', 'DIO12': 'P2'}
 on = '\x05'
 off = '\x04'
 cmd_id = '\xC0'
@@ -48,7 +48,7 @@ def setup_argparser():
     #parsing commandline arguments
     parser = argparse.ArgumentParser(description='Controls GPIO port on remote XBEE device')
     parser.add_argument('device', help="8 byte device address, e.g 0013A20040A15ABA")
-    parser.add_argument('gpio', choices=['DIO0', 'DIO1', 'DIO2', 'DIO3', 'DIO4', 'DIO5', 'DIO11', 'DIO12', 'DIO13'], help="GPIO port")
+    parser.add_argument('gpio', choices=['DIO0', 'DIO1', 'DIO2', 'DIO3', 'DIO4', 'DIO5', 'DIO11', 'DIO12'], help="GPIO port")
     parser.add_argument('state', type=int, choices=[1, 0], help="Turn on or off")
     parser.add_argument('port', help='Serial port device, e.g COM7 or /dev/ttyUSB0')
     parser.add_argument('--ack', help='awaits response to check if packet was successfully sent (TCP like).', action='store_true')

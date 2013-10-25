@@ -3,8 +3,8 @@ import serial
 from xbee import ZigBee
 
 status_help = {'\x01': 'Error', '\x02': 'Invalid command', '\x03': 'Invalid parameter', '\x04': 'Remote command transmission failed (check device address & configuration)'}
-pin_to_command = {'DIO0': 'D0', 'DIO1': 'D1', 'DIO2': 'D2', 'DIO3': 'D3', 'DIO4': 'D4', 'DIO5': 'D5', 'DIO11': 'P1', 'DIO12': 'P2', 'DIO13': 'P3'}
-response_lookup = {'DIO0': 'adc-0', 'DIO1': 'adc-1', 'DIO2': 'adc-2', 'DIO3': 'dio-3', 'DIO4': 'dio-4', 'DIO5': 'dio-5', 'DIO11': 'dio-11', 'DIO12': 'dio-12', 'DIO13': 'dio-13'}
+pin_to_command = {'DIO0': 'D0', 'DIO1': 'D1', 'DIO2': 'D2', 'DIO3': 'D3', 'DIO4': 'D4', 'DIO5': 'D5', 'DIO11': 'P1', 'DIO12': 'P2'}
+response_lookup = {'DIO0': 'adc-0', 'DIO1': 'adc-1', 'DIO2': 'adc-2', 'DIO3': 'dio-3', 'DIO4': 'dio-4', 'DIO5': 'dio-5', 'DIO11': 'dio-11', 'DIO12': 'dio-12'}
 cmd_id = '\xC0'
 
 
@@ -61,7 +61,7 @@ def setup_argparser():
     #parsing commandline arguments
     parser = argparse.ArgumentParser(description='Query GPIO Port on remote XBEE Device')
     parser.add_argument('device', help="8 byte device address, e.g 0013A20040A15ABA")
-    parser.add_argument('gpio', choices=['DIO0', 'DIO1', 'DIO2', 'DIO3', 'DIO4', 'DIO5', 'DIO11', 'DIO12', 'DIO13'],
+    parser.add_argument('gpio', choices=['DIO0', 'DIO1', 'DIO2', 'DIO3', 'DIO4', 'DIO5', 'DIO11', 'DIO12'],
                         help="GPIO Port - the port must be set to analog input mode (mode 2)")
     parser.add_argument('port', help='Serial Port Device, e.g COM7 or /dev/ttyUSB0')
     args = parser.parse_args()
