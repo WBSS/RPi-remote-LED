@@ -1,14 +1,28 @@
 RPi-remote-LED
 ==============
 
-Python Scripts zum steuern/abfragen der GPIO Pins von XBEE Devices.
+Python Scripts zum steuern/abfragen der GPIO Pins von XBEE Serie 2 Devices.
 
 ##Installation
 Benötigte Packete:
 ```sudo aptitude install python-pip```
 ```sudo pip install -r requirements.txt```
 
-##XBEE-remote-set.py
+##PINOUT
+Folgende Pinbezeichnung können als Parameter verwendet werden:
+| PIN   | NAME  |
+| ----- | ----- |
+| 20    | DIO0  |
+| 19    | DIO1  |
+| 18    | DIO2  |
+| 17    | DIO3  |
+| 11    | DIO4  |
+| 15    | DIO5  |
+| 7     | DIO11 |
+| 4     | DIO12 |
+
+##Usage
+###XBEE-remote-set.py
 Controls (switch on/off) GPIO port on remote XBEE device
 <pre>
 positional arguments:
@@ -25,8 +39,10 @@ optional arguments:
 </pre>
 example:
 ```sudo ./XBEE-remote-set.py 0013a200409888ba DIO11 1 COM7 --ack```
+output:
+```command successfull```
 
-##XBEE-remote-get.py
+###XBEE-remote-get.py
 Query GPIO Port on remote XBEE Device
 
 <pre>
@@ -40,5 +56,6 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit```
 </pre>
-example:
-```XBEE-remote-get.py 0013a200409888ba DIO11 COM7```
+Beispiel:
+```sudo ./XBEE-remote-get.py 0013a200409888ba DIO11 COM7```
+Ausgabe: True oder False bei digital Eingang, Wert von 0-1023 bei analog Eingang
