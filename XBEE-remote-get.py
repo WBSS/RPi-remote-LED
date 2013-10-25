@@ -25,7 +25,6 @@ def main():
         #ack received
         if response['status'] == '\x00' and response['frame_id'] == cmd_id:
             try:
-                print response
                 print response['parameter'][0][response_lookup[args.gpio]]
 
             #desired value not included in response
@@ -60,7 +59,7 @@ def to_hex(s):
 
 def setup_argparser():
     #parsing commandline arguments
-    parser = argparse.ArgumentParser(description='Controls GPIO Port on remote XBEE Device')
+    parser = argparse.ArgumentParser(description='Query GPIO Port on remote XBEE Device')
     parser.add_argument('device', help="8 byte device address, e.g 0013A20040A15ABA")
     parser.add_argument('gpio', choices=['DIO0', 'DIO1', 'DIO2', 'DIO3', 'DIO4', 'DIO5', 'DIO11', 'DIO12', 'DIO13'],
                         help="GPIO Port - the port must be set to analog input mode (mode 2)")
