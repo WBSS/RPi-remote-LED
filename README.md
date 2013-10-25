@@ -4,10 +4,10 @@ RPi-remote-LED
 Python Scripts zum steuern/abfragen der GPIO Pins von XBEE Serie 2 Devices.
 
 ##Installation
-Benötigte Packete:
+Benötigte Packete:  
 
-```sudo aptitude install python-pip```
-```sudo pip install -r requirements.txt```
+```sudo aptitude install python-pip```  
+```sudo pip install -r requirements.txt```  
 
 ##PINOUT
 Folgende Pinbezeichnungen können als Parameter verwendet werden:
