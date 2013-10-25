@@ -62,7 +62,7 @@ def setup_argparser():
     parser = argparse.ArgumentParser(description='Query GPIO Port on remote XBEE Device')
     parser.add_argument('device', help="8 byte device address, e.g 0013A20040A15ABA")
     parser.add_argument('gpio', choices=['DIO0', 'DIO1', 'DIO2', 'DIO3', 'DIO4', 'DIO5', 'DIO11', 'DIO12'],
-                        help="GPIO Port - the port must be set to analog input mode (mode 2)")
+                        help="GPIO Port - the port must be set to analog or digital input mode (mode 2)")
     parser.add_argument('port', help='Serial Port Device, e.g COM7 or /dev/ttyUSB0')
     args = parser.parse_args()
     return args
