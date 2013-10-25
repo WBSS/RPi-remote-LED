@@ -25,8 +25,9 @@ Folgende Pinbezeichnungen können als Parameter verwendet werden:
 
 ##Usage
 ###XBEE-remote-set.py
-Controls (switch on/off) GPIO port on remote XBEE device
 <pre>
+Controls (switch on/off) GPIO port on remote XBEE device
+
 positional arguments:
   device                8 byte device address, e.g 0013A20040A15ABA
   {DIO0,DIO1,DIO2,DIO3,DIO4,DIO5,DIO11,DIO12}
@@ -45,9 +46,9 @@ Beispiel:
 
 
 ###XBEE-remote-get.py
+<pre>
 Query GPIO Port on remote XBEE Device
 
-<pre>
 positional arguments:
   device                8 byte device address, e.g 0013A20040A15ABA
   {DIO0,DIO1,DIO2,DIO3,DIO4,DIO5,DIO11,DIO12}
