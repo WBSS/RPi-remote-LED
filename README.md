@@ -4,7 +4,7 @@ RPi-remote-LED
 Python Scripts zum steuern/abfragen der GPIO Pins von XBEE Devices.
 
 ##Installation
-Benötigte Packete
+Benötigte Packete:
 ```sudo aptitude install python-pip```
 ```sudo pip install -r requirements.txt```
 
@@ -38,5 +38,5 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
 
-example:
+example:  
 ```XBEE-remote-get.py 0013a200409888ba DIO11 COM7```
