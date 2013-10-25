@@ -42,8 +42,7 @@ optional arguments:
 
 Beispiel:  
 ```sudo ./XBEE-remote-set.py 0013a200409888ba DIO11 1 /dev/ttyS0 --ack```  
-output:  
-```command successfull```
+
 
 ###XBEE-remote-get.py
 Query GPIO Port on remote XBEE Device
